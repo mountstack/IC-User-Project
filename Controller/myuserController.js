@@ -1,25 +1,25 @@
 const User = require('../Model/User'); 
 
-function createUser(req, res) {
-    const { name, age, email, hobby } = req.body; 
-    const user = new User({
-        name: name, 
-        age: age, 
-        email: email, 
-        hobby: hobby
-    }) 
+// function createUser(req, res) {
+//     const { name, age, email, hobby } = req.body; 
+//     const user = new User({
+//         name: name, 
+//         age: age, 
+//         email: email, 
+//         hobby: hobby
+//     }) 
 
-    user.save()
-        .then((data) => {
-            res.json({
-                message: 'User created successfully', 
-                data
-            }) 
-        })
-        .catch(err => {
-            res.json({error: err})
-        })
-}
+//     user.save()
+//         .then((data) => {
+//             res.json({
+//                 message: 'User created successfully', 
+//                 data
+//             }) 
+//         })
+//         .catch(err => {
+//             res.json({error: err})
+//         })
+// }
 
 async function getAllUsers(req, res) {
     try {
@@ -73,7 +73,7 @@ async function deleteUser(req, res) {
 }
 
 module.exports = {
-    createUser, 
+    // createUser, 
     getAllUsers, 
     getSingleUser, 
     updateUser, 

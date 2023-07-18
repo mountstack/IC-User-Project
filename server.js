@@ -1,6 +1,7 @@
 const express = require('express'); 
 const mongoose = require('mongoose'); 
 const userRoute = require('./Routes/userRouter'); 
+const authRoute = require('./Routes/authRouter')
 
 const app = express(); 
 app.use(express.json()); 
@@ -8,6 +9,8 @@ app.use(express.json());
 // Routing  --> USER 
 
 app.use('/api/user', userRoute); 
+app.use('/api/auth', authRoute); 
+
 // app.use('/api/product', productRoute); 
 // app.use('/api/order', orderRoute); 
 
