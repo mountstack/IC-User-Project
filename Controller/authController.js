@@ -1,5 +1,6 @@
 const User = require('../Model/User'); 
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken'); 
 
 async function registration(req, res) {
     // 1. Receive data 
@@ -35,8 +36,43 @@ async function registration(req, res) {
         }) 
 } 
 
+async function login(req, res) {
+    // 1. Get data 
+    const { email, password } = req.body; 
+    if(!email || !password) { 
+        return res.json({ 
+            message: 'Wrong email or password'
+        }) 
+    } 
+
+    // 2. User exist 
+    const user = await User.findOne({email}); 
+    if(!user) {
+        return res.json({ 
+            message: 'Wrong email'
+        }) 
+    } 
+
+    // 3. Password matching 
+    const result = await user.comparePassword(password, user.password); 
+    if(!result) {
+        return res.json({ 
+            message: 'Wrong password'
+        }) 
+    } 
+
+
+    // 4. Send Token 
+    const token = jwt.sign({email}, 'This_Is_My_Secret_Key', {expiresIn: '1d'}); 
+
+    res.json({
+        message: 'Login Successful', 
+        token: `Bearer ${token}`
+    })
+} 
 
 
 module.exports = {
-    registration
+    registration, 
+    login
 } 

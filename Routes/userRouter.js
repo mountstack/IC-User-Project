@@ -1,4 +1,5 @@
 const express = require('express'); 
+const authenticate = require('../Middlewares/Authentication')
 const { 
     // createUser, 
     getAllUsers, 
@@ -13,6 +14,6 @@ const route = express.Router();
 route.get('/', getAllUsers); 
 route.get('/:id', getSingleUser); 
 route.patch('/:id', updateUser);  
-route.delete('/:id', deleteUser); // /api/user/:id 
+route.delete('/:id', authenticate, deleteUser); // /api/user/:id 
 
 module.exports = route; 
