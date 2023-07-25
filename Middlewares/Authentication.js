@@ -15,4 +15,23 @@ const authenticate = (req, res, next) => {
     } 
 } 
 
-module.exports = authenticate; 
+
+const accessTo = (arr) => { 
+    return function middleware(req, res, next) { 
+        console.log({arr});
+        console.log({user: req.user}); 
+        console.log({permission: arr.includes(req.user.role)});
+        if(!arr.includes(req.user.role)) { 
+            return res.json({
+                message: "You don't have permission"
+            })
+        }
+        
+        next(); 
+    } 
+} 
+
+module.exports = {
+    authenticate, 
+    accessTo
+}; 

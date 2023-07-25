@@ -30,7 +30,12 @@ const UserSchema = new Schema({
         type: String, 
         required: [true, 'Password is required'] 
     }, 
-    hobby: [String]
+    hobby: [String], 
+    role: {
+        type: String, 
+        required: true, 
+        default: 'user'
+    } 
 }, { 
     timestamps: true
 }); 
