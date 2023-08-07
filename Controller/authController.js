@@ -46,13 +46,13 @@ async function login(req, res) {
     } 
 
     // 2. User exist 
-    const user = await User.findOne({email}); 
+    const user = await User.findOne({email}).select('+password'); 
     if(!user) {
         return res.json({ 
             message: 'Wrong email'
         }) 
     } 
-    const { role } = user; 
+    const { _id, role } = user; 
 
     // 3. Password matching 
     const result = await user.comparePassword(password, user.password); 
@@ -64,7 +64,7 @@ async function login(req, res) {
 
 
     // 4. Send Token 
-    const token = jwt.sign({email, role}, 'This_Is_My_Secret_Key', {expiresIn: '1d'}); 
+    const token = jwt.sign({_id, email, role}, 'This_Is_My_Secret_Key', {expiresIn: '1d'}); 
 
     res.json({
         message: 'Login Successful', 

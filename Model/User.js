@@ -5,12 +5,10 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
     name: {
         type: String, 
-        // required: [true, 'Name is required'], 
         trim: true, 
     }, 
     age: {
         type: Number, 
-        // required: [true, 'Age is required'], 
         min: [18, 'Minimum age is 18'], 
         max: [40, 'Maximum allowed age is 40']
     }, 
@@ -28,6 +26,7 @@ const UserSchema = new Schema({
     }, 
     password: {
         type: String, 
+        select: false, 
         required: [true, 'Password is required'] 
     }, 
     hobby: [String], 
