@@ -7,6 +7,8 @@ const authRoute = require('./Routes/authRouter');
 const postRoute = require('./Routes/postRoutes'); 
 const commentRoute = require('./Routes/commentRoute'); 
 
+const User = require('./Model/User'); 
+
 const socketWorld = require('./socket/socket'); 
 
 
@@ -14,7 +16,16 @@ const app = express();
 app.use(cors()); 
 app.use(express.json()); 
 
+// set the view engine to ejs 
+app.set('view engine', 'ejs'); 
+app.set('views', './views'); 
+
 // Routing  --> USER 
+
+app.get('/', async (req, res) => { 
+    const users = await User.find(); 
+    res.render('index', {users}); 
+}) 
 
 app.use('/api/user', userRoute); 
 app.use('/api/auth', authRoute); 
