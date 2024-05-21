@@ -7,11 +7,6 @@ const UserSchema = new Schema({
         type: String, 
         trim: true, 
     }, 
-    age: {
-        type: Number, 
-        min: [18, 'Minimum age is 18'], 
-        max: [40, 'Maximum allowed age is 40']
-    }, 
     email: { 
         type: String, 
         required: [true, 'Email is required'], 
@@ -29,7 +24,6 @@ const UserSchema = new Schema({
         select: false, 
         required: [true, 'Password is required'] 
     }, 
-    hobby: [String], 
     role: {
         type: String, 
         required: true, 

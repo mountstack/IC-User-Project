@@ -8,4 +8,10 @@ const route = express.Router();
 route.post('/', authenticate, create); 
 route.get('/', findAll); 
 
+route.get('/test', authenticate, (req, res) => {
+    res.json({
+        success: true
+    })
+}); 
+
 module.exports = route; 

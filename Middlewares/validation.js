@@ -1,10 +1,8 @@
 
-
-
 function validate(req, res, next) { 
     const { email, password, confirmPassword } = req.body; 
     if(password !== confirmPassword) {
-        res.json({
+        return res.json({
             message: "Password & confirm password doesn't match"
         })
     } 

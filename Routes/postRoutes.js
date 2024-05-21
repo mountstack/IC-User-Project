@@ -1,16 +1,23 @@
 const express = require('express'); 
-const { create, findAll, findSingle } = require('../Controller/postController'); 
-const { authenticate, accessTo } = require('../Middlewares/Authentication')
+const { 
+    create, 
+    findAll, 
+    findSingle, 
+    findMyProfilePosts, 
+    deleteSinglePost, 
+    updateSinglePost
+} = require('../Controller/postController'); 
+const { authenticate } = require('../Middlewares/Authentication')
 
 const route = express.Router(); 
 
+route.get('/my-posts', authenticate, findMyProfilePosts); 
 
 route.post('/', authenticate, create); 
 route.get('/', findAll); 
 route.get('/:id', findSingle); 
-
-// Update 
-// Delete 
+route.delete('/:id', deleteSinglePost); 
+route.patch('/:id', updateSinglePost); 
 
 
 

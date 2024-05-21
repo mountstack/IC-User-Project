@@ -1,7 +1,6 @@
 const express = require('express'); 
 const { authenticate, accessTo } = require('../Middlewares/Authentication')
 const { 
-    // createUser, 
     getAllUsers, 
     getSingleUser, 
     updateUser, 
@@ -10,7 +9,6 @@ const {
 
 const route = express.Router(); 
 
-// route.post('/', createUser); 
 route.get('/', getAllUsers); 
 route.get('/:id', getSingleUser); 
 route.patch('/:id', updateUser);  
